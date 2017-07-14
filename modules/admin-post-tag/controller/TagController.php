@@ -63,6 +63,7 @@ class TagController extends \AdminController
             if(false === ($id = PTag::create($object)))
                 throw new \Exception(PTag::lastError());
         }else{
+            $object->updated = null;
             if(false === PTag::set($object, $id))
                 throw new \Exception(PTag::lastError());
         }
