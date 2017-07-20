@@ -73,6 +73,24 @@ class TagController extends \AdminController
         return $this->redirect($params['ref']);
     }
     
+    public function filterAction(){
+        if(!$this->user->login)
+            return $this->show404();
+        if(!$this->can_i->read_post_tag)
+            return $this->show404();
+        
+        $q = $this->req->getQuery('q');
+        if(!$q)
+            return $this->ajax(['error'=>true, 'data'=>[]]);
+        
+        $tags = PTag::get(['q'=>$q], 10);
+        if(!$tags)
+            return $this->ajax(['error'=>false, 'data'=>[]]);
+        
+        $result = array_column($tags, 'name', 'id');
+        $this->ajax(['error'=>false, 'data'=>$result]);
+    }
+    
     public function indexAction(){
         if(!$this->user->login)
             return $this->loginFirst('adminLogin');

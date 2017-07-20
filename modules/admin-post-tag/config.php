@@ -36,6 +36,10 @@ return [
                 'rule'  => '/post/tag/:id',
                 'handler' => 'AdminPostTag\\Controller\\Tag::edit'
             ],
+            'adminPostTagFilter' => [
+                'rule'  => '/post/tag/filter',
+                'handler' => 'AdminPostTag\\Controller\\Tag::filter'
+            ],
             'adminPostTagRemove' => [
                 'rule'  => '/post/tag/:id/remove',
                 'handler' => 'AdminPostTag\\Controller\\Tag::remove'
