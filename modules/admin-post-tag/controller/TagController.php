@@ -23,8 +23,6 @@ class TagController extends \AdminController
         ];
     }
     
-    
-    
     public function editAction(){
         if(!$this->user->login)
             return $this->show404();
@@ -83,7 +81,7 @@ class TagController extends \AdminController
         if(!$q)
             return $this->ajax(['error'=>true, 'data'=>[]]);
         
-        $tags = PTag::get(['q'=>$q], 10);
+        $tags = PTag::get(['q'=>$q], 10, false, 'LENGTH(name) ASC');
         if(!$tags)
             return $this->ajax(['error'=>false, 'data'=>[]]);
         
