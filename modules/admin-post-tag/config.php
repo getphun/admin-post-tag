@@ -33,6 +33,7 @@ return [
                 'handler' => 'AdminPostTag\\Controller\\Tag::index'
             ],
             'adminPostTagEdit' => [
+                'priority' => 0,
                 'rule'  => '/post/tag/:id',
                 'handler' => 'AdminPostTag\\Controller\\Tag::edit'
             ],
