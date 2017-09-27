@@ -43,7 +43,7 @@ class TagController extends \AdminController
             $object = PTag::get($id, false);
             if(!$object)
                 return $this->show404();
-            $old = $object;
+            $old = clone $object;
         }else{
             $object = new \stdClass();
             $object->user = $this->user->id;
@@ -64,6 +64,10 @@ class TagController extends \AdminController
             $object->updated = null;
             if(false === PTag::set($object, $id))
                 throw new \Exception(PTag::lastError());
+            
+            // save slug changes
+            if(isset($object->slug) && $object->slug != $old->slug && module_exists('slug-history'))
+                $this->slug->create('post-tag', $id, $old->slug, $object->slug);
         }
         
         $this->fire('post-tag:'. $event, $object, $old);

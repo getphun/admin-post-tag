@@ -16,7 +16,8 @@ return [
     ],
     '__dependencies' => [
         'admin',
-        'post-tag'
+        'post-tag',
+        '/slug-history'
     ],
     '_services' => [],
     '_autoload' => [
